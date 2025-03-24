@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS urls
+
+CREATE TABLE urls(
+    id LONG PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(1000),
+    created_at timestamp
+);
