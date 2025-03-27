@@ -28,11 +28,16 @@ public class App {
     }
 
     public static Javalin getApp() throws IOException, SQLException {
-
+        String env = System.getenv().getOrDefault("ENV", "local");
         var hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl(System.getenv()
-                .getOrDefault("DATABASE_URL", "jdbc:h2:mem:project"));
-        hikariConfig.setDriverClassName("org.postgresql.Driver");
+        if (env.equals("production")) {
+            hikariConfig.setJdbcUrl(System.getenv()
+                    .get("DATABASE_URL"));
+            hikariConfig.setDriverClassName("org.postgresql.Driver");
+        } else {
+            hikariConfig.setJdbcUrl("jdbc:h2:mem:project");
+            hikariConfig.setDriverClassName("org.h2.Driver");
+        }
         hikariConfig.setMaximumPoolSize(10);
         hikariConfig.setMinimumIdle(2);
         hikariConfig.setIdleTimeout(30000);
