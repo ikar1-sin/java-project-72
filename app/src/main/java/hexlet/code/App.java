@@ -31,7 +31,13 @@ public class App {
 
         var hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl(System.getenv()
-                .getOrDefault("JDBC_DATABASE_URL", "jdbc:h2:mem:project"));
+                .getOrDefault("DATABASE_URL", "jdbc:h2:mem:project"));
+        hikariConfig.setDriverClassName("org.postgresql.Driver");
+        hikariConfig.setMaximumPoolSize(10);
+        hikariConfig.setMinimumIdle(2);
+        hikariConfig.setIdleTimeout(30000);
+        hikariConfig.setMaxLifetime(1800000);
+        hikariConfig.setConnectionTimeout(30000);
         HikariDataSource ds = new HikariDataSource(hikariConfig);
         var sql = readResourceFile("schema.sql");
 
