@@ -32,7 +32,7 @@ public class App {
         var hikariConfig = new HikariConfig();
         if (env.equals("production")) {
             hikariConfig.setJdbcUrl(System.getenv()
-                    .get("DATABASE_URL"));
+                    .get("JDBC_DATABASE_URL"));
             hikariConfig.setDriverClassName("org.postgresql.Driver");
         } else {
             hikariConfig.setJdbcUrl("jdbc:h2:mem:project");
