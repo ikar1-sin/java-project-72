@@ -17,7 +17,7 @@
                 </tr>
                 <tr>
                     <td>Дата Создания</td>
-                    <td>${String.valueOf(page.getUrl().getCreated_at())}</td>
+                    <td>${String.valueOf(page.getUrl().getCreatedAt())}</td>
                 </tr>
             </tbody>
         </table>
