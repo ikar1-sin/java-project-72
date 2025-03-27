@@ -28,21 +28,9 @@ public class App {
     }
 
     public static Javalin getApp() throws IOException, SQLException {
-        String env = System.getenv().getOrDefault("ENV", "local");
         var hikariConfig = new HikariConfig();
-        if (env.equals("production")) {
-            hikariConfig.setJdbcUrl(System.getenv()
-                    .get("JDBC_DATABASE_URL"));
-            hikariConfig.setDriverClassName("org.postgresql.Driver");
-        } else {
-            hikariConfig.setJdbcUrl("jdbc:h2:mem:project");
-            hikariConfig.setDriverClassName("org.h2.Driver");
-        }
-        hikariConfig.setMaximumPoolSize(10);
-        hikariConfig.setMinimumIdle(2);
-        hikariConfig.setIdleTimeout(30000);
-        hikariConfig.setMaxLifetime(1800000);
-        hikariConfig.setConnectionTimeout(30000);
+        hikariConfig.setJdbcUrl(System.getenv()
+                .getOrDefault("JDBC_DATABASE_URL", "jdbc:h2:mem:project"));
         HikariDataSource ds = new HikariDataSource(hikariConfig);
         var sql = readResourceFile("schema.sql");
 
