@@ -34,7 +34,7 @@
                 <tr>
                     <td>${url.getId()}</td>
                     <td><a href="urls/${url.getId()}">${url.getName()}</a></td>
-                    <td>${String.valueOf(url.getCreated_at())}</td>
+                    <td>${String.valueOf(url.getCreatedAt())}</td>
                     <td>puk</td>
                 </tr>
             @endfor
