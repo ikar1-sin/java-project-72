@@ -25,5 +25,5 @@ jobs:
 #          CC_TEST_REPORTER_ID: ${{secrets.QLTY_COVERAGE_TOKEN}}
           JACOCO_SOURCE_PATH: "${{github.workspace}}/app/src/main/java"
         with:
-          coverage-token: {{secrets.QLTY_COVERAGE_TOKEN}}
+          coverage-token: ${{secrets.QLTY_COVERAGE_TOKEN}}
           files: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
