@@ -19,9 +19,9 @@ jobs:
       - name: Build with Gradle
         run: make build
 
+      - run: make report
       - name: Test & Code coverage
         uses: qltysh/qlty-action/coverage@main
-        run: make report
         env:
           JACOCO_SOURCE_PATH: "${{github.workspace}}/app/src/main/java"
         with:
