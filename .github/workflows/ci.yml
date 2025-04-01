@@ -21,9 +21,9 @@ jobs:
 
       - name: Test & Code coverage
         uses: qltysh/qlty-action/coverage@main
+        run: make report
         env:
-#          CC_TEST_REPORTER_ID: ${{secrets.QLTY_COVERAGE_TOKEN}}
           JACOCO_SOURCE_PATH: "${{github.workspace}}/app/src/main/java"
         with:
           coverage-token: ${{secrets.QLTY_COVERAGE_TOKEN}}
-          files: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
+          files: /app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco

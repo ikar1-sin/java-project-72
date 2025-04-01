@@ -18,7 +18,7 @@ import java.sql.SQLException;
 public class AppTest {
     private Javalin app;
     @BeforeEach
-    public void install() throws SQLException, IOException {
+    public final void install() throws SQLException, IOException {
         app = App.getApp();
     }
 
