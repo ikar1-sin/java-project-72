@@ -36,7 +36,7 @@ public class UrlCheckController {
                     h1
             );
             urlCheck.setUrlId(id);
-            urlCheck.setCreatedAt(timeStamp);
+            urlCheck.setCreatedAt(timeStamp.toLocalDateTime());
             UrlCheckRepository.save(urlCheck);
             ctx.sessionAttribute("flash", "Страница успешно проверена.");
         } catch (Exception e) {

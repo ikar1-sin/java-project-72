@@ -4,6 +4,7 @@ import hexlet.code.model.UrlCheck;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +22,7 @@ public class UrlCheckRepository extends BaseRepository {
             preparedStmt.setString(3, urlCheck.getTitle());
             preparedStmt.setString(4, urlCheck.getDescription());
             preparedStmt.setString(5, urlCheck.getH1());
-            preparedStmt.setTimestamp(6, urlCheck.getCreatedAt());
+            preparedStmt.setTimestamp(6, Timestamp.valueOf(urlCheck.getCreatedAt()));
             preparedStmt.executeUpdate();
             var generatedKeys = preparedStmt.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -48,7 +49,7 @@ public class UrlCheckRepository extends BaseRepository {
                 );
                 var urlId = rs.getLong("url_id");
                 urlCheck.setUrlId(urlId);
-                urlCheck.setCreatedAt(rs.getTimestamp("created_at"));
+                urlCheck.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
                 urlCheck.setId(rs.getLong("id"));
                 result.put(urlId, urlCheck);
             }
@@ -72,7 +73,7 @@ public class UrlCheckRepository extends BaseRepository {
                         rs.getString("title"),
                         rs.getString("description")
                 );
-                urlCheck.setCreatedAt(rs.getTimestamp("created_at"));
+                urlCheck.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
                 urlCheck.setUrlId(rs.getLong("url_id"));
                 urlCheck.setId(rs.getLong("id"));
                 result.add(urlCheck);
