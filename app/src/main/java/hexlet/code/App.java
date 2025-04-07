@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import gg.jte.ContentType;
 import hexlet.code.controller.RootController;
+import hexlet.code.controller.UrlCheckController;
 import hexlet.code.controller.UrlController;
 import hexlet.code.repository.BaseRepository;
 import hexlet.code.util.NamedRoutes;
@@ -32,7 +33,8 @@ public class App {
         hikariConfig.setJdbcUrl(System.getenv()
                 .getOrDefault("JDBC_DATABASE_URL", "jdbc:h2:mem:project"));
         HikariDataSource ds = new HikariDataSource(hikariConfig);
-        var sql = readResourceFile("schema.sql");
+        ds.setMaximumPoolSize(100);
+        var sql = readResourceFile("url.sql");
 
         try (var conn = ds.getConnection();
             var stmt = conn.createStatement()) {
@@ -49,6 +51,7 @@ public class App {
         app.post(NamedRoutes.urlsPath(), UrlController::create);
         app.get(NamedRoutes.urlsPath(), UrlController::index);
         app.get(NamedRoutes.urlPath("{id}"), UrlController::show);
+        app.post(NamedRoutes.urlCheckPath("{id}"), UrlCheckController::index);
 
         return app;
     }
@@ -64,7 +67,7 @@ public class App {
         return Integer.parseInt(port);
     }
 
-    private static String readResourceFile(String fileName) throws IOException {
+    public static String readResourceFile(String fileName) throws IOException {
         var inputStream = App.class.getClassLoader().getResourceAsStream(fileName);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
             return reader.lines().collect(Collectors.joining("\n"));

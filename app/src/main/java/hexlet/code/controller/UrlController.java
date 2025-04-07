@@ -3,6 +3,7 @@ package hexlet.code.controller;
 import hexlet.code.dto.url.UrlPage;
 import hexlet.code.dto.url.UrlsPage;
 import hexlet.code.model.Url;
+import hexlet.code.repository.UrlCheckRepository;
 import hexlet.code.repository.UrlRepository;
 import hexlet.code.util.NamedRoutes;
 import io.javalin.http.Context;
@@ -37,7 +38,8 @@ public class UrlController {
 
     public static void index(Context ctx) throws SQLException {
         var urls = UrlRepository.getEntities();
-        var page = new UrlsPage(urls);
+        var lastCheck = UrlCheckRepository.getLastCheck();
+        var page = new UrlsPage(urls, lastCheck);
         page.setFlash(ctx.consumeSessionAttribute("flash"));
         ctx.render("url/index.jte", model("page", page));
     }
@@ -46,7 +48,9 @@ public class UrlController {
         var id = ctx.pathParamAsClass("id", Long.class).get();
         var url = UrlRepository.find(id)
                 .orElseThrow(() -> new NotFoundResponse("Entity with id = " + id + " not found"));
-        var page = new UrlPage(url);
+        var urlsCheck = UrlCheckRepository.getEntities(id);
+        var page = new UrlPage(url, urlsCheck);
+        page.setFlash(ctx.consumeSessionAttribute("flash"));
         ctx.render("url/show.jte", model("page", page));
     }
 

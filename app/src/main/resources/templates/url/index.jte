@@ -34,8 +34,12 @@
                 <tr>
                     <td>${url.getId()}</td>
                     <td><a href="urls/${url.getId()}">${url.getName()}</a></td>
-                    <td>${String.valueOf(url.getCreatedAt())}</td>
-                    <td>puk</td>
+                    <td>
+                        ${!page.getLastCheckMap().isEmpty() && page.getLastCheckMap().get(url.getId()) != null
+                        ? page.getLastCheckMap().get(url.getId()).getCreatedAt().toString() : null}
+                    </td>
+                    <td>${!page.getLastCheckMap().isEmpty() && page.getLastCheckMap().get(url.getId()) != null
+                    ? page.getLastCheckMap().get(url.getId()).getStatusCode() : null}</td>
                 </tr>
             @endfor
             </tbody>
