@@ -9,7 +9,7 @@ CREATE TABLE urls(
 
 CREATE TABLE url_check(
     id SERIAL PRIMARY KEY,
-    url_id SERIAL NOT NULL REFERENCES urls(id),
+    url_id INTEGER NOT NULL REFERENCES urls(id),
     status_code INT NOT NULL,
     h1 VARCHAR(5000),
     title VARCHAR(5000),
