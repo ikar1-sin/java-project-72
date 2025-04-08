@@ -17,11 +17,11 @@ public class UrlCheck {
     private String description;
     private LocalDateTime createdAt;
 
-    public UrlCheck(int statusCode, String title, String description, String h1) {
+    public UrlCheck(int statusCode, String h1, String title, String description) {
         this.statusCode = statusCode;
+        this.h1 = h1;
         this.title = title;
         this.description = description;
-        this.h1 = h1;
     }
 
 

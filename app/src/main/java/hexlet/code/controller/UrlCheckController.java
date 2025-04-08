@@ -31,9 +31,9 @@ public class UrlCheckController {
             var timeStamp = new Timestamp(System.currentTimeMillis());
             var urlCheck = new UrlCheck(
                     statusCode,
+                    h1,
                     title,
-                    description,
-                    h1
+                    description
             );
             urlCheck.setUrlId(id);
             urlCheck.setCreatedAt(timeStamp.toLocalDateTime());

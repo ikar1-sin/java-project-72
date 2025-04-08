@@ -38,7 +38,7 @@
     <div class="container-xl">
         <div class="text-center">
             created by
-            <a href="https://ru.hexlet.io" target="_blank">Hexlet</a>
+            <a href="https://github.com/ikar1-sin" target="_blank">Ikar1-sin</a>
         </div>
     </div>
 </footer>
