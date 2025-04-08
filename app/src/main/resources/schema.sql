@@ -1,13 +1,13 @@
-DROP TABLE IF EXISTS url_check;
+DROP TABLE IF EXISTS url_checks;
 DROP TABLE IF EXISTS urls;
 
-CREATE TABLE urls(
+CREATE TABLE urls (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL
 );
 
-CREATE TABLE url_check(
+CREATE TABLE url_checks (
     id SERIAL PRIMARY KEY,
     url_id INTEGER NOT NULL REFERENCES urls(id) ON DELETE CASCADE,
     status_code INT NOT NULL,

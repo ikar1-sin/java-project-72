@@ -14,6 +14,7 @@ import io.javalin.Javalin;
 import gg.jte.TemplateEngine;
 import gg.jte.resolve.ResourceCodeResolver;
 import io.javalin.rendering.template.JavalinJte;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,6 +23,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class App {
     public static void main(String[] args) throws IOException, SQLException {
         var app = getApp();
@@ -42,6 +44,7 @@ public class App {
         }
         BaseRepository.dataSource = ds;
 
+        log.info(sql);
         var app = Javalin.create(config -> {
             config.bundledPlugins.enableDevLogging();
             config.fileRenderer(new JavalinJte(createTemplateEngine()));
