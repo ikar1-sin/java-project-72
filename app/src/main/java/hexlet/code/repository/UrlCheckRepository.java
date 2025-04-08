@@ -19,9 +19,9 @@ public class UrlCheckRepository extends BaseRepository {
         ) {
             preparedStmt.setLong(1, urlCheck.getUrlId());
             preparedStmt.setInt(2, urlCheck.getStatusCode());
-            preparedStmt.setString(3, urlCheck.getTitle());
-            preparedStmt.setString(4, urlCheck.getDescription());
-            preparedStmt.setString(5, urlCheck.getH1());
+            preparedStmt.setString(3, urlCheck.getH1());
+            preparedStmt.setString(4, urlCheck.getTitle());
+            preparedStmt.setString(5, urlCheck.getDescription());
             preparedStmt.setTimestamp(6, Timestamp.valueOf(urlCheck.getCreatedAt()));
             preparedStmt.executeUpdate();
             var generatedKeys = preparedStmt.getGeneratedKeys();
