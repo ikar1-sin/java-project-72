@@ -34,7 +34,7 @@ public class App {
                 .getOrDefault("JDBC_DATABASE_URL", "jdbc:h2:mem:project"));
         HikariDataSource ds = new HikariDataSource(hikariConfig);
         ds.setMaximumPoolSize(100);
-        var sql = readResourceFile("url.sql");
+        var sql = readResourceFile("schema.sql");
 
         try (var conn = ds.getConnection();
             var stmt = conn.createStatement()) {
