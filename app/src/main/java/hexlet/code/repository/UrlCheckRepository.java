@@ -59,7 +59,7 @@ public class UrlCheckRepository extends BaseRepository {
 
 
     public static List<UrlCheck> getEntities(Long id) throws SQLException {
-        String sql = "SELECT * FROM url_checks WHERE url_id=?";
+        String sql = "SELECT * FROM url_checks WHERE url_id=? ORDER BY url_id ASC";
         var result = new ArrayList<UrlCheck>();
         try (var conn = dataSource.getConnection();
              var stmt = conn.prepareStatement(sql)

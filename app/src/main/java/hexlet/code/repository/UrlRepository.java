@@ -71,7 +71,7 @@ public class UrlRepository extends BaseRepository {
     }
 
     public static List<Url> getEntities() throws SQLException {
-        String sql = "SELECT * FROM urls";
+        String sql = "SELECT * FROM urls ORDER BY name ASC";
         try (var conn = dataSource.getConnection();
              var stmt = conn.createStatement();
              var rs = stmt.executeQuery(sql)
