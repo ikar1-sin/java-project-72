@@ -15,7 +15,7 @@ public class UrlCheckRepository extends BaseRepository {
         String sql = "INSERT INTO url_checks (url_id, status_code, h1, title, description, created_at)"
                 + "VALUES(?,?,?,?,?,?)";
         try (var conn = dataSource.getConnection();
-            var preparedStmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
+             var preparedStmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
         ) {
             preparedStmt.setLong(1, urlCheck.getUrlId());
             preparedStmt.setInt(2, urlCheck.getStatusCode());
@@ -36,7 +36,7 @@ public class UrlCheckRepository extends BaseRepository {
         String sql = "SELECT DISTINCT ON (url_id) * FROM url_checks ORDER BY url_id, created_at DESC";
         var result = new HashMap<Long, UrlCheck>();
         try (var conn = dataSource.getConnection();
-            var stmt = conn.createStatement()
+             var stmt = conn.createStatement()
         ) {
             var rs = stmt.executeQuery(sql);
 
@@ -62,7 +62,7 @@ public class UrlCheckRepository extends BaseRepository {
         String sql = "SELECT * FROM url_checks WHERE url_id=?";
         var result = new ArrayList<UrlCheck>();
         try (var conn = dataSource.getConnection();
-            var stmt = conn.prepareStatement(sql)
+             var stmt = conn.prepareStatement(sql)
         ) {
             stmt.setLong(1, id);
             var rs = stmt.executeQuery();

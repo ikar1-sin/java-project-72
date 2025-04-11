@@ -39,7 +39,7 @@ public class App {
         var sql = readResourceFile("schema.sql");
 
         try (var conn = ds.getConnection();
-            var stmt = conn.createStatement()) {
+             var stmt = conn.createStatement()) {
             stmt.execute(sql);
         }
         BaseRepository.dataSource = ds;

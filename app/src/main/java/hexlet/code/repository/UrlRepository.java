@@ -1,6 +1,7 @@
 package hexlet.code.repository;
 
 import hexlet.code.model.Url;
+
 import static hexlet.code.util.UrlUtils.shortenUrl;
 
 import java.net.MalformedURLException;
@@ -18,7 +19,7 @@ public class UrlRepository extends BaseRepository {
     public static void save(Url url) throws SQLException, MalformedURLException, URISyntaxException {
         String sql = "INSERT INTO urls (name, created_at) VALUES (?, ?)";
         try (var conn = dataSource.getConnection();
-            var preparedStmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
+             var preparedStmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
         ) {
             preparedStmt.setString(1, shortenUrl(url.getName()));
             var createdAt = LocalDateTime.now();
@@ -39,7 +40,7 @@ public class UrlRepository extends BaseRepository {
     public static Optional<Url> find(Long id) throws SQLException {
         String sql = "SELECT * FROM urls WHERE id=?";
         try (var conn = dataSource.getConnection();
-            var preparedStmt = conn.prepareStatement(sql);
+             var preparedStmt = conn.prepareStatement(sql);
         ) {
             preparedStmt.setLong(1, id);
             var rs = preparedStmt.executeQuery();
@@ -58,7 +59,7 @@ public class UrlRepository extends BaseRepository {
     public static boolean existsByName(String name) throws SQLException, MalformedURLException, URISyntaxException {
         String sql = "SELECT COUNT(*) FROM urls WHERE name=?";
         try (var conn = dataSource.getConnection();
-            var preparedStmt = conn.prepareStatement(sql)
+             var preparedStmt = conn.prepareStatement(sql)
         ) {
             preparedStmt.setString(1, shortenUrl(name));
             var rs = preparedStmt.executeQuery();
@@ -72,8 +73,8 @@ public class UrlRepository extends BaseRepository {
     public static List<Url> getEntities() throws SQLException {
         String sql = "SELECT * FROM urls";
         try (var conn = dataSource.getConnection();
-            var stmt = conn.createStatement();
-            var rs = stmt.executeQuery(sql)
+             var stmt = conn.createStatement();
+             var rs = stmt.executeQuery(sql)
         ) {
             var result = new ArrayList<Url>();
 
@@ -89,7 +90,6 @@ public class UrlRepository extends BaseRepository {
             return result;
         }
     }
-
 
 
 }
