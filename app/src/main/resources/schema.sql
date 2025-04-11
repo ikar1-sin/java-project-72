@@ -1,4 +1,4 @@
-ALTER TABLE url_checks DROP CONSTRAINT IF EXISTS url_id;
+DROP TABLE IF EXISTS url_checks;
 DROP TABLE IF EXISTS urls;
 
 CREATE TABLE urls (
@@ -15,5 +15,5 @@ CREATE TABLE url_checks (
     title VARCHAR(5000),
     description VARCHAR(5000),
     created_at TIMESTAMP,
-    FOREIGN KEY (url_id) REFERENCES urls(id) ON DELETE CASCADE
+    CONSTRAINT url_checks_url_id_foreign FOREIGN KEY (url_id) REFERENCES urls(id) ON DELETE CASCADE
 );

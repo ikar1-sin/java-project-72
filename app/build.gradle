@@ -2,7 +2,6 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
-    id 'java'
     id 'application'
     id 'checkstyle'
     id 'jacoco'
@@ -31,7 +30,7 @@ dependencies {
     implementation 'com.zaxxer:HikariCP:6.2.1'
     implementation 'com.h2database:h2:2.3.232'
     implementation 'gg.jte:jte:3.1.16'
-    implementation 'org.postgresql:postgresql:42.6.0'
+    implementation 'org.postgresql:postgresql:42.7.2'
     implementation 'io.javalin:javalin-bundle:6.5.0'
     implementation 'com.konghq:unirest-java:3.14.5'
     implementation 'org.jsoup:jsoup:1.19.1'
