@@ -12,7 +12,7 @@ import java.util.List;
 public class UrlCheckRepository extends BaseRepository {
 
     public static void save(UrlCheck urlCheck) throws SQLException {
-        String sql = "INSERT INTO url_checks (url_id, status_code, h1, title, description, created_at)"
+        String sql = "INSERT INTO url_check (url_id, status_code, h1, title, description, created_at)"
                 + "VALUES(?,?,?,?,?,?)";
         try (var conn = dataSource.getConnection();
              var preparedStmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
@@ -33,7 +33,7 @@ public class UrlCheckRepository extends BaseRepository {
     }
 
     public static HashMap<Long, UrlCheck> getLastCheck() throws SQLException {
-        String sql = "SELECT DISTINCT ON (url_id) * FROM url_checks ORDER BY url_id, created_at DESC";
+        String sql = "SELECT DISTINCT ON (url_id) * FROM url_check ORDER BY url_id, created_at DESC";
         var result = new HashMap<Long, UrlCheck>();
         try (var conn = dataSource.getConnection();
              var stmt = conn.createStatement()
@@ -59,7 +59,7 @@ public class UrlCheckRepository extends BaseRepository {
 
 
     public static List<UrlCheck> getEntities(Long id) throws SQLException {
-        String sql = "SELECT * FROM url_checks WHERE url_id=?";
+        String sql = "SELECT * FROM url_check WHERE url_id=?";
         var result = new ArrayList<UrlCheck>();
         try (var conn = dataSource.getConnection();
              var stmt = conn.prepareStatement(sql)
