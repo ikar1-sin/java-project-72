@@ -15,5 +15,5 @@ CREATE TABLE url_checks (
     title VARCHAR(5000),
     description VARCHAR(5000),
     created_at TIMESTAMP,
-    CONSTRAINT url_checks_url_id_foreign FOREIGN KEY (url_id) REFERENCES urls(id) ON DELETE CASCADE
+    CONSTRAINT url_checks_url_id_fkey FOREIGN KEY (url_id) REFERENCES urls(id) ON DELETE CASCADE
 );
