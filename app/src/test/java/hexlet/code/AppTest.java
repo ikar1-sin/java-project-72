@@ -89,7 +89,7 @@ public class AppTest {
     public void testCheckUrl() throws IOException, SQLException, URISyntaxException {
         mockWebServer.start();
         mockWebServer.enqueue(new MockResponse().setBody(App.readResourceFile("test.html")));
-        var baseUrl = mockWebServer.url("/").toString().replaceAll("/$","");
+        var baseUrl = mockWebServer.url("/").toString().replaceAll("/$", "");
         var url = new Url(baseUrl);
         UrlRepository.save(url);
         var urlId = url.getId();
