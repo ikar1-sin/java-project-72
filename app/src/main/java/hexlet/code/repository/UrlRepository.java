@@ -60,12 +60,12 @@ public class UrlRepository extends BaseRepository {
         String sql = "SELECT * FROM urls WHERE name=?";
         try (var conn = dataSource.getConnection();
              var preparedStmt = conn.prepareStatement(sql)) {
-                preparedStmt.setString(1, name);
-                var rs = preparedStmt.executeQuery();
-                if (rs.next()) {
-                    var url = new Url(rs.getString("name"));
-                    return Optional.of(url);
-                }
+            preparedStmt.setString(1, name);
+            var rs = preparedStmt.executeQuery();
+            if (rs.next()) {
+                var url = new Url(rs.getString("name"));
+                return Optional.of(url);
+            }
         }
         return Optional.empty();
     }
