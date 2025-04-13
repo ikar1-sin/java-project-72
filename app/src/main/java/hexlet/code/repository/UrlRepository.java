@@ -56,6 +56,20 @@ public class UrlRepository extends BaseRepository {
         }
     }
 
+    public static Optional<Url> findByName(String name) throws SQLException {
+        String sql = "SELECT * FROM urls WHERE name=?";
+        try (var conn = dataSource.getConnection();
+             var preparedStmt = conn.prepareStatement(sql)) {
+                preparedStmt.setString(1, name);
+                var rs = preparedStmt.executeQuery();
+                if (rs.next()) {
+                    var url = new Url(rs.getString("name"));
+                    return Optional.of(url);
+                }
+        }
+        return Optional.empty();
+    }
+
     public static boolean existsByName(String name) throws SQLException, MalformedURLException, URISyntaxException {
         String sql = "SELECT COUNT(*) FROM urls WHERE name=?";
         try (var conn = dataSource.getConnection();

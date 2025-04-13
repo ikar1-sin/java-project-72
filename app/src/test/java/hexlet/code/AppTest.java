@@ -71,23 +71,33 @@ public class AppTest {
     }
 
     @Test
-    public void testCreateUrl() {
+    public void testCreateUrl() throws SQLException {
+        var inputUrl = "https://github.com";
         JavalinTest.test(app, (server, client) -> {
-            var requestBody = "url=https://github.com";
+            var requestBody = "url=" + inputUrl;
             var response = client.post("/urls", requestBody);
             assertThat(response.code()).isEqualTo(200);
             assertThat(response.body().string().contains("https://github.com"));
         });
+        var actualUrl = UrlRepository.findByName(inputUrl).orElse(null);
+
+        assertThat(actualUrl).isNotNull();
+        assertThat(actualUrl.getName()).isEqualTo(inputUrl);
     }
 
     @Test
     public void testCheckUrl() throws IOException, SQLException, URISyntaxException {
         mockWebServer.start();
         mockWebServer.enqueue(new MockResponse().setBody(App.readResourceFile("test.html")));
-        var baseUrl = mockWebServer.url("/").toString();
+        var baseUrl = mockWebServer.url("/").toString().replaceAll("/$","");
         var url = new Url(baseUrl);
         UrlRepository.save(url);
         var urlId = url.getId();
+
+        var actualUrl = UrlRepository.findByName(baseUrl).orElse(null);
+
+        assertThat(actualUrl).isNotNull();
+        assertThat(actualUrl.getName()).isEqualTo(baseUrl);
 
         JavalinTest.test(app, (server, client) -> {
             var response = client.post(NamedRoutes.urlCheckPath(urlId));
