@@ -20,8 +20,10 @@ public class UrlController {
 
     public static void create(Context ctx) throws SQLException, MalformedURLException, URISyntaxException {
         var name = ctx.formParam("url");
-        if (shortenUrl(name).equalsIgnoreCase("Некорректный URL")) {
-            ctx.sessionAttribute("flash", shortenUrl(name));
+        try {
+            shortenUrl(name);
+        } catch (Exception e) {
+            ctx.sessionAttribute("flash", "Невалидный URL");
             ctx.redirect(NamedRoutes.rootPath());
             return;
         }

@@ -37,7 +37,8 @@
                     <td><a href="urls/${url.getId()}">${url.getName()}</a></td>
                     <td>
                         ${!page.getLastCheckMap().isEmpty() && page.getLastCheckMap().get(url.getId()) != null
-                        ? page.getLastCheckMap().get(url.getId()).getCreatedAt().toString() : null}
+                        ? page.getLastCheckMap().get(url.getId())
+                        .getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) : null}
                     </td>
                     <td>${!page.getLastCheckMap().isEmpty() && page.getLastCheckMap().get(url.getId()) != null
                     ? page.getLastCheckMap().get(url.getId()).getStatusCode() : null}</td>
